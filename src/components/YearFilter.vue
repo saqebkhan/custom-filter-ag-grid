@@ -1,28 +1,72 @@
 <template>
-  <div class="custom-filter">
-    <div>
-      <input type="checkbox" value="Select All" @change="onSelectAllChange" :checked="isAllSelected" />
-      Select All
+  <div>
+    <div class="custom-filter">
+      <input type="text" placeholder="Search" v-model="searchInput" />
+      <hr />
+      <div class="filter-options-container">
+        <input
+          type="checkbox"
+          value="Select All"
+          @change="onSelectAllChange"
+          :checked="isAllSelected"
+        />
+        Select All
+      </div>
+      <div
+        v-for="(option, index) in filteredFilterOptions"
+        :key="index"
+        style="padding: 2px"
+      >
+        <input
+          type="checkbox"
+          :value="option"
+          v-model="selectedOptions"
+          @change="onFilterChange"
+        />
+        {{ option }}
+      </div>
     </div>
-    <div v-for="option in filterOptions" :key="option">
-      <input type="checkbox" :value="option" v-model="selectedOptions" @change="onFilterChange" />
-      {{ option }}
+    <div class="filter-buttons">
+      <button @click="resetFilters">Reset</button>
+      <button @click="applyFilters">Apply</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CustomFilter',
+  name: "CustomFilter",
   data() {
     return {
       selectedOptions: [],
-      filterOptions: ['Alice', 'Bob', 'Daisy'],
+      searchInput: "",
+      filterOptions: [
+        "Alice",
+        "Bob",
+        "Daisy",
+        "Alice",
+        "Bob",
+        "Daisy",
+        "Alice",
+        "Bob",
+        "Daisy",
+        "Alice",
+        "Bob",
+        "Daisy",
+        "Alice",
+        "Bob",
+        "Daisy",
+      ],
     };
   },
   computed: {
     isAllSelected() {
       return this.selectedOptions.length === this.filterOptions.length;
+    },
+    filteredFilterOptions() {
+      return this.filterOptions.filter((option) =>
+        option.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
     },
   },
   methods: {
@@ -49,6 +93,22 @@ export default {
       }
       this.onFilterChange();
     },
+    resetFilters() {
+      this.selectedOptions = [];
+      this.searchInput = "";
+      this.params.filterChangedCallback();
+    },
+    applyFilters() {
+      this.params.filterChangedCallback();
+    },
   },
 };
 </script>
+
+<style>
+.custom-filter {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 6px;
+}
+</style>

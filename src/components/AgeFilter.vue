@@ -1,5 +1,6 @@
 <template>
   <div class="custom-filter">
+    <input type="text" placeholder="Search" v-model="searchInput" />
     <div>
       <input
         type="checkbox"
@@ -9,14 +10,18 @@
       />
       Select All
     </div>
-    <div v-for="option in filterOptions" :key="option">
+    <div v-for="(option, index) in filteredFilterOptions" :key="index">
       <input
         type="checkbox"
         :value="option"
         v-model="selectedOptions"
         @change="onFilterChange"
       />
-      {{ option }}
+      <label :for="option">{{ option }}</label>
+    </div>
+    <div class="filter-buttons">
+      <button @click="resetFilters">Reset</button>
+      <button @click="applyFilters">Apply</button>
     </div>
   </div>
 </template>
@@ -27,12 +32,18 @@ export default {
   data() {
     return {
       selectedOptions: [],
+      searchInput: "",
       filterOptions: ["Below 10", "10-18", "18-25", "Above 25"],
     };
   },
   computed: {
     isAllSelected() {
       return this.selectedOptions.length === this.filterOptions.length;
+    },
+    filteredFilterOptions() {
+      return this.filterOptions.filter((option) =>
+        option.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
     },
   },
   methods: {
@@ -80,6 +91,16 @@ export default {
       }
       this.onFilterChange();
     },
+    resetFilters() {
+      this.selectedOptions = [];
+      this.searchInput = "";
+      this.params.filterChangedCallback();
+    },
+    applyFilters() {
+      this.params.filterChangedCallback();
+    },
   },
 };
 </script>
+
+<style></style>
