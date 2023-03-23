@@ -55,10 +55,14 @@ export default {
   },
   methods: {
     isFilterActive() {
-      return this.selectedOptions.length > 0;
+      return true;
     },
     doesFilterPass(params) {
-      return this.selectedOptions.includes(params.data.name);
+      if (this.selectedOptions.length === 0 && params.data.name === undefined) {
+        return true;
+      } else {
+        return this.selectedOptions.includes(params.data.name);
+      }
     },
     getModel() {
       return { value: this.selectedOptions };

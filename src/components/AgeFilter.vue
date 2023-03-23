@@ -46,9 +46,14 @@ export default {
       );
     },
   },
+  // watch: {
+  //   selectedOptions(val) {
+      
+  //   },
+  // },
   methods: {
     isFilterActive() {
-      return this.selectedOptions.length > 0;
+      return true;
     },
     doesFilterPass(params) {
       if (this.selectedOptions.includes("Below 10") && params.data.age < 10) {
@@ -69,6 +74,8 @@ export default {
         this.selectedOptions.includes("Above 25") &&
         params.data.age >= 25
       ) {
+        return true;
+      }else if(this.selectedOptions.length === 0 && params.data.age <= 0){
         return true;
       }
 
