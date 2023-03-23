@@ -82,7 +82,7 @@ export default {
       this.onFilterChange();
     },
     resetFilters() {
-      this.selectedOptions = [];
+      this.selectedOptions = ["Alice", "Bob", "Daisy"];
       this.searchInput = "";
       this.params.filterChangedCallback();
     },

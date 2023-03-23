@@ -48,7 +48,7 @@ export default {
   },
   // watch: {
   //   selectedOptions(val) {
-      
+
   //   },
   // },
   methods: {
@@ -75,7 +75,7 @@ export default {
         params.data.age >= 25
       ) {
         return true;
-      }else if(this.selectedOptions.length === 0 && params.data.age <= 0){
+      } else if (this.selectedOptions.length === 0 && params.data.age <= 0) {
         return true;
       }
 
@@ -99,7 +99,7 @@ export default {
       this.onFilterChange();
     },
     resetFilters() {
-      this.selectedOptions = [];
+      this.selectedOptions = ["Below 10", "10-18", "18-25", "Above 25"];
       this.searchInput = "";
       this.params.filterChangedCallback();
     },
