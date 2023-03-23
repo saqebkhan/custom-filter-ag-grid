@@ -31,7 +31,7 @@ export default {
   name: "CustomFilter",
   data() {
     return {
-      selectedOptions: [],
+      selectedOptions: ["Below 10", "10-18", "18-25", "Above 25"],
       searchInput: "",
       filterOptions: ["Below 10", "10-18", "18-25", "Above 25"],
     };

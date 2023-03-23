@@ -38,25 +38,9 @@ export default {
   name: "CustomFilter",
   data() {
     return {
-      selectedOptions: [],
+      selectedOptions: ["Alice", "Bob", "Daisy"],
       searchInput: "",
-      filterOptions: [
-        "Alice",
-        "Bob",
-        "Daisy",
-        "Alice",
-        "Bob",
-        "Daisy",
-        "Alice",
-        "Bob",
-        "Daisy",
-        "Alice",
-        "Bob",
-        "Daisy",
-        "Alice",
-        "Bob",
-        "Daisy",
-      ],
+      filterOptions: ["Alice", "Bob", "Daisy"],
     };
   },
   computed: {
